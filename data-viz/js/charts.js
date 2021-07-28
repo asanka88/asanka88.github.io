@@ -93,7 +93,8 @@
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
 
-      setInterval(function(){
+      clearInterval(myFunc)
+      var myFunc=setInterval(function(){
         d3.selectAll(".risky")
         .transition().duration(0)
           .style("fill", "red")
@@ -222,7 +223,13 @@ $(document).ready(function(){
       .attr('class', 'd3-tip')
       .offset([-1, 0])
       .html(function (d) {
-        return "<strong>Item Name: </strong><span class='details'>" + d.data.Item + "<br></span>" + "<strong>Amount of Calories: </strong><span style='color:red' class='details'>" + d.data.Calories + "</span>";
+
+        return "<strong>Item Name: </strong><span class='details'>" + d.data.Item + "<br></span>" + 
+        "<strong>Total Calories: </strong><span style='color:red' class='details'>" + d.data.Calories + "</span></br>"+
+        "<strong>Category: </strong><span style='color:red' class='details'>" + d.data.Category + "</span><br/>"+
+        "<strong>Serving: </strong><span style='color:red' class='details'>" + d.data["Serving Size"] + "</span>";
+        ;
+
       })
 
     var bubble = d3.pack(dataset)
