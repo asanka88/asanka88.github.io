@@ -210,7 +210,7 @@
 
 
 $(document).ready(function(){
-  d3.csv("https://asanka88.github.io/data/menu.csv", function (data) {
+  d3.csv("https://asanka88.github.io/data-viz/data/menu.csv", function (data) {
     var dataset = {};
     dataset.children = data;
     var diameter = 750;
