@@ -73,6 +73,9 @@
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end");  
+
+
+
     svg.selectAll(".bar1")
       .data(data)
       .enter().append("rect")
@@ -82,7 +85,7 @@
       .attr("height", function (d) { return height - y(d.amount); })
       .attr("fill","steelBlue")
       .attr("class",function(d){
-        console.log(d)
+        // console.log(d)
 
         if (d.amount>1){
            return "risky"
@@ -192,6 +195,18 @@
       .attr("x", function (d) { return x(d.measure); })
       .attr("width", x.bandwidth() * 0.75)
       .attr("y", function (d) { return y(d.amount); })
+      .attr("class",function(d){
+        let name=d["measure"]+" (% Daily Value)"
+        console.log(name)
+        let amount=oriData[name]
+        console.log(amount)
+
+        if (d.amount>100){
+           return "risky_nutri"
+        }
+        return "bar1"
+
+      })
       .attr("fill","steelBlue")
       .attr("height", function (d) { return height - y(d.amount); })
       .on('mouseover', tip.show)
@@ -207,6 +222,8 @@
     .style("fill","white")
     .style("text-anchor", "middle")
     .text("Nutrient Content (in grams)");   
+
+
   }
 
 
