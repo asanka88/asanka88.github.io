@@ -1,20 +1,20 @@
 
    
-   function renderPercentageDailyValues(data) {
+   function drawPerecentageGraph(data) {
   
-    var percentagesArray = [];
-    percentagesArray.push({ "measure": "Total Fat (%)", "amount": parseFloat(data["Total Fat (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Saturated Fat (%)", "amount": parseFloat(data["Saturated Fat (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Cholesterol (%)", "amount": parseFloat(data["Cholesterol (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Sodium (%)", "amount": parseFloat(data["Sodium (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Carbohydrates (%)", "amount": parseFloat(data["Carbohydrates (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Dietary Fiber (%)", "amount": parseFloat(data["Dietary Fiber (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Vitamin A (%)", "amount": parseFloat(data["Vitamin A (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Vitamin C (%)", "amount": parseFloat(data["Vitamin C (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Calcium (%)", "amount": parseFloat(data["Calcium (% Daily Value)"]) / 100 });
-    percentagesArray.push({ "measure": "Iron (%)", "amount": parseFloat(data["Iron (% Daily Value)"]) / 100 });
+    var tmpArray = [];
+    tmpArray.push({ "measure": "Total Fat (%)", "amount": parseFloat(data["Total Fat (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Saturated Fat (%)", "amount": parseFloat(data["Saturated Fat (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Cholesterol (%)", "amount": parseFloat(data["Cholesterol (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Sodium (%)", "amount": parseFloat(data["Sodium (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Carbohydrates (%)", "amount": parseFloat(data["Carbohydrates (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Dietary Fiber (%)", "amount": parseFloat(data["Dietary Fiber (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Vitamin A (%)", "amount": parseFloat(data["Vitamin A (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Vitamin C (%)", "amount": parseFloat(data["Vitamin C (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Calcium (%)", "amount": parseFloat(data["Calcium (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Iron (%)", "amount": parseFloat(data["Iron (% Daily Value)"]) / 100 });
   
-    data = percentagesArray;
+    data = tmpArray;
   
     var margin = { top: 40, right: 20, bottom: 100, left: 80 },
       width = 720 - margin.left - margin.right,
@@ -116,22 +116,22 @@
     .text("Percentage Daily Recommended");   
   }
   
-  function renderNutritionGraph (data) {
+  function drawNutritionGraph (data) {
   
     document.getElementById("selectedItem").innerText = data["Item"] + " : " + data["Calories"] + " Calories"
     oriData=data
-    var dataGramsArray = [];
-    dataGramsArray.push({ "measure": "Total Fat", "amount": parseFloat(data["Total Fat"]) });
-    dataGramsArray.push({ "measure": "Saturated Fat", "amount": parseFloat(data["Saturated Fat"]) });
-    dataGramsArray.push({ "measure": "Trans Fat", "amount": parseFloat(data["Trans Fat"]) });
-    dataGramsArray.push({ "measure": "Cholesterol", "amount": parseFloat(data["Cholesterol"]) / 1000 });
-    dataGramsArray.push({ "measure": "Sodium", "amount": parseFloat(data["Sodium"]) / 1000 });
-    dataGramsArray.push({ "measure": "Carbohydrates", "amount": parseFloat(data["Carbohydrates"]) });
-    dataGramsArray.push({ "measure": "Dietary Fiber", "amount": parseFloat(data["Dietary Fiber"]) });
-    dataGramsArray.push({ "measure": "Sugars", "amount": parseFloat(data["Sugars"]) });
-    dataGramsArray.push({ "measure": "Protein", "amount": parseFloat(data["Protein"]) });
+    var tmpArray = [];
+    tmpArray.push({ "measure": "Total Fat", "amount": parseFloat(data["Total Fat"]) });
+    tmpArray.push({ "measure": "Saturated Fat", "amount": parseFloat(data["Saturated Fat"]) });
+    tmpArray.push({ "measure": "Trans Fat", "amount": parseFloat(data["Trans Fat"]) });
+    tmpArray.push({ "measure": "Cholesterol", "amount": parseFloat(data["Cholesterol"]) / 1000 });
+    tmpArray.push({ "measure": "Sodium", "amount": parseFloat(data["Sodium"]) / 1000 });
+    tmpArray.push({ "measure": "Carbohydrates", "amount": parseFloat(data["Carbohydrates"]) });
+    tmpArray.push({ "measure": "Dietary Fiber", "amount": parseFloat(data["Dietary Fiber"]) });
+    tmpArray.push({ "measure": "Sugars", "amount": parseFloat(data["Sugars"]) });
+    tmpArray.push({ "measure": "Protein", "amount": parseFloat(data["Protein"]) });
   
-    data = dataGramsArray;
+    data = tmpArray;
   
     var margin = { top: 40, right: 20, bottom: 100, left: 80 },
       width = 720 - margin.left - margin.right,
@@ -221,8 +221,8 @@ $(document).ready(function(){
     dataset.children = data;
     var diameter = 750;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
-    renderNutritionGraph(data[0]);
-    renderPercentageDailyValues(data[0]);
+    drawNutritionGraph(data[0]);
+    drawPerecentageGraph(data[0]);
 
     var tip = d3.tip()
       .attr('class', 'd3-tip')
@@ -278,8 +278,8 @@ $(document).ready(function(){
       .on("click", function (d) {
         document.getElementById("gramsArea").innerHTML = "";
         document.getElementById("percentageArea").innerHTML = "";
-        renderNutritionGraph(d.data);
-        renderPercentageDailyValues(d.data);
+        drawNutritionGraph(d.data);
+        drawPerecentageGraph(d.data);
         document.getElementById("chartsArea").click();
         document.getElementById("selectedItem").innerText = d.data["Item"] + " : " + d.data["Calories"] + " Calories"
       });
