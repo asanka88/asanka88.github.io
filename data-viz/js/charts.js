@@ -1,18 +1,19 @@
+var colorCharts = d3.scaleOrdinal(d3.schemeCategory20);
 
    
    function drawPerecentageGraph(data) {
-  
+
     var tmpArray = [];
     tmpArray.push({ "measure": "Total Fat (%)", "amount": parseFloat(data["Total Fat (% Daily Value)"]) / 100 });
     tmpArray.push({ "measure": "Saturated Fat (%)", "amount": parseFloat(data["Saturated Fat (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Trans Fat (%)", "amount": parseFloat(data["Trans Fat (% Daily Value)"]) / 100 });
     tmpArray.push({ "measure": "Cholesterol (%)", "amount": parseFloat(data["Cholesterol (% Daily Value)"]) / 100 });
     tmpArray.push({ "measure": "Sodium (%)", "amount": parseFloat(data["Sodium (% Daily Value)"]) / 100 });
     tmpArray.push({ "measure": "Carbohydrates (%)", "amount": parseFloat(data["Carbohydrates (% Daily Value)"]) / 100 });
     tmpArray.push({ "measure": "Dietary Fiber (%)", "amount": parseFloat(data["Dietary Fiber (% Daily Value)"]) / 100 });
-    tmpArray.push({ "measure": "Vitamin A (%)", "amount": parseFloat(data["Vitamin A (% Daily Value)"]) / 100 });
-    tmpArray.push({ "measure": "Vitamin C (%)", "amount": parseFloat(data["Vitamin C (% Daily Value)"]) / 100 });
-    tmpArray.push({ "measure": "Calcium (%)", "amount": parseFloat(data["Calcium (% Daily Value)"]) / 100 });
-    tmpArray.push({ "measure": "Iron (%)", "amount": parseFloat(data["Iron (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Sugars (%)", "amount": parseFloat(data["Sugars (% Daily Value)"]) / 100 });
+    tmpArray.push({ "measure": "Protein (%)", "amount": parseFloat(data["Protein (% Daily Value)"]) / 100 });
+
   
     data = tmpArray;
   
@@ -83,7 +84,10 @@
       .attr("width", x.bandwidth() * 0.75)
       .attr("y", function (d) { return y(d.amount); })
       .attr("height", function (d) { return height - y(d.amount); })
-      .attr("fill","steelBlue")
+      // .attr("fill","steelBlue")
+      .style("fill", function (d, i) {
+        return colorCharts(i);
+      })
       .attr("class",function(d){
         // console.log(d)
 
@@ -117,7 +121,8 @@
   }
   
   function drawNutritionGraph (data) {
-  
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+
     document.getElementById("selectedItem").innerText = data["Item"] + " : " + data["Calories"] + " Calories"
     oriData=data
     var tmpArray = [];
@@ -195,7 +200,10 @@
       .attr("x", function (d) { return x(d.measure); })
       .attr("width", x.bandwidth() * 0.75)
       .attr("y", function (d) { return y(d.amount); })
-      .attr("fill","steelBlue")
+      // .attr("fill","steelBlue")
+      .style("fill", function (d, i) {
+        return colorCharts(i);
+      })
       .attr("height", function (d) { return height - y(d.amount); })
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
